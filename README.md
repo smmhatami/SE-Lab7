@@ -22,3 +22,8 @@
 ![Screenshot from 2023-12-17 23-40-08](https://github.com/smmhatami/SE-Lab7/assets/62210297/3cc5eff0-810e-4c08-866e-f0125c8a1483)
 
 ![Screenshot from 2023-12-17 23-41-02](https://github.com/smmhatami/SE-Lab7/assets/62210297/57d9c28a-6477-493b-9f5e-2b22a8ceddbd)
+
+### بخش دوم : بهبود پوشش آزمون در CodeCoverageProject 
+برای این بخش نیز ابتدا پروژه را باز کرده و اجرای تست با پوشش آزمون را بر روی تمام تست های آن اجرا می کنیم. به این منظور روی پوشه ی test/java کلیک راست کرده و گزینه ی Run 'All Tests' with Coverage را انتخاب می کنیم. نتیجه ی این اجرا را در تصویر زیر مشاهده می کنید. 
+
+![Screenshot from 2023-12-18 00-13-04](https://github.com/smmhatami/SE-Lab7/assets/62210297/98dce122-69d1-49fc-8420-1fb563da664d)
