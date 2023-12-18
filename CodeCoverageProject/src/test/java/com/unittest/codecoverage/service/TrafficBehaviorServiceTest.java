@@ -1,5 +1,6 @@
 package com.unittest.codecoverage.service;
 
+import com.unittest.codecoverage.models.StreetDirectionFlow;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,5 +50,29 @@ public class TrafficBehaviorServiceTest {
 			.hasMessage("You should be more careful");
 		
 	}
+
+	@Test
+	@DisplayName("Should throw exception when footpassenger crosses the road during heavy traffic without attention")
+	public void testFootpassengerCrossTheStreet_shouldThrowBehaviorExceptionWhenFootpassengerCrossesTheRoadDuringHeavyTrafficWithoutLookSidesWhenTrafficLightIsGreenAndWithSpeedBoundaries() {
+
+		Traffic currentTrafic = new Traffic();
+		currentTrafic.setIntenseCarTraffic(true);
+		currentTrafic.setStreetDirectionFlow(StreetDirectionFlow.TWO_WAY);
+		currentTrafic.setMaxSpeedAllowed((short) 50);
+		currentTrafic.setMinSpeedAllowed((short) 20);
+		currentTrafic.setCurrentTrafficLight(TrafficLigth.GREEN);
+
+		Footpassenger currentFootpassengerBehavior = new Footpassenger();
+		currentFootpassengerBehavior.setCrossedTheRoad(true);
+		currentFootpassengerBehavior.setCrossedTrafficLigth(TrafficLigth.GREEN);
+		currentFootpassengerBehavior.setLookedToTheLeft(false);
+		currentFootpassengerBehavior.setLookedToTheRight(false);
+
+		Assertions.assertThatThrownBy(() -> trafficBehaviorService.footpassengerCrossTheStreet(currentTrafic, currentFootpassengerBehavior))
+				.isInstanceOf(BehaviorException.class)
+				.hasMessage("You should be more careful");
+
+	}
+
 
 }
