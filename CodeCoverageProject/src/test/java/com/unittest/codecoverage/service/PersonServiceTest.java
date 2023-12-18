@@ -1,6 +1,7 @@
 package com.unittest.codecoverage.service;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -111,6 +112,37 @@ public class PersonServiceTest {
 				.isInstanceOf(PersonException.class)
 				.hasFieldOrPropertyWithValue("errors", expectedErrors)
 				.hasMessage(expectedMessage);
+	}
+
+	@Test
+	public void testDelete_shouldThrowPersonExceptionWhenPersonNameIsNull() {
+
+		List<String> expectedErrors = Lists.newArrayList("Name is required");
+		String expectedMessage = String.join(";", expectedErrors);
+		Person person = new Person();
+		person.setName("Name");
+		person.setGender(Gender.M);
+		service.insert(person);
+
+		assertThatThrownBy(() -> service.delete(null))
+				.isInstanceOf(PersonException.class)
+				.hasFieldOrPropertyWithValue("errors", expectedErrors)
+				.hasMessage(expectedMessage);
+	}
+
+	@Test
+	public void testDeletePerson() {
+
+		Person person = new Person();
+		person.setName("Name");
+		person.setGender(Gender.M);
+		service.insert(person);
+
+		try {
+			service.delete("Name");
+		} catch (Exception e) {
+			fail("The delete method should not throw an exception, but it threw: " + e.getMessage());
+		}
 	}
 
 }
