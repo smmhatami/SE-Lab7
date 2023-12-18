@@ -97,4 +97,20 @@ public class PersonServiceTest {
 			.hasMessage(expectedMessage);
 	}
 
+	@Test
+	public void testGet_shouldThrowPersonExceptionWhenPersonNameIsNull() {
+
+		List<String> expectedErrors = Lists.newArrayList("Name is required");
+		String expectedMessage = String.join(";", expectedErrors);
+		Person person = new Person();
+		person.setName("Name");
+		person.setGender(Gender.M);
+		service.insert(person);
+
+		assertThatThrownBy(() -> service.get(null))
+				.isInstanceOf(PersonException.class)
+				.hasFieldOrPropertyWithValue("errors", expectedErrors)
+				.hasMessage(expectedMessage);
+	}
+
 }
