@@ -25,6 +25,7 @@ public class TrafficBehaviorServiceTest {
 		Footpassenger currentFootpassengerBehavior = new Footpassenger();
 		currentFootpassengerBehavior.setCrossedTheRoad(true);
 		currentFootpassengerBehavior.setCrossedTrafficLigth(TrafficLigth.RED);
+		currentFootpassengerBehavior.setCrossedTheCrosswalk(false);
 		
 		Assertions.assertThatThrownBy(() -> trafficBehaviorService.footpassengerCrossTheStreet(currentTrafic, currentFootpassengerBehavior))
 			.isInstanceOf(BehaviorException.class)
