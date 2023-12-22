@@ -2,6 +2,7 @@ package com.unittest.codecoverage.service;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -30,13 +31,17 @@ public class PersonServiceTest {
 	PersonRepository repository;
 	
 	@Test
-	public void testInsert_shouldInsertPersonWithSuccessWhenAllPersonsInfoIsFilled() {
+	public void testInsert_shouldInsertPersonWithSuccessWhenAllPersonsInfoIsFilledAndPersonIsNotChanged() {
 		Person person = new Person();
 		person.setName("Name");
 		person.setAge(21);
 		person.setGender(Gender.M);
 		
 		when(repository.insert(any(Person.class))).thenReturn(person);
+
+		assertEquals(person.getName(), "Name");
+		assertEquals(person.getAge(), 21);
+		assertEquals(person.getGender(), Gender.M);
 		
 		service.insert(person);
 	}
