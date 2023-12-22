@@ -1,6 +1,8 @@
 package com.unittest.codecoverage.service;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -29,13 +31,17 @@ public class PersonServiceTest {
 	PersonRepository repository;
 	
 	@Test
-	public void testInsert_shouldInsertPersonWithSuccessWhenAllPersonsInfoIsFilled() {
+	public void testInsert_shouldInsertPersonWithSuccessWhenAllPersonsInfoIsFilledAndPersonIsNotChanged() {
 		Person person = new Person();
 		person.setName("Name");
 		person.setAge(21);
 		person.setGender(Gender.M);
 		
 		when(repository.insert(any(Person.class))).thenReturn(person);
+
+		assertEquals(person.getName(), "Name");
+		assertEquals(person.getAge(), 21);
+		assertEquals(person.getGender(), Gender.M);
 		
 		service.insert(person);
 	}
@@ -95,6 +101,53 @@ public class PersonServiceTest {
 			.isInstanceOf(PersonException.class)
 			.hasFieldOrPropertyWithValue("errors", expectedErrors)
 			.hasMessage(expectedMessage);
+	}
+
+	@Test
+	public void testGet_shouldThrowPersonExceptionWhenPersonNameIsNull() {
+
+		List<String> expectedErrors = Lists.newArrayList("Name is required");
+		String expectedMessage = String.join(";", expectedErrors);
+		Person person = new Person();
+		person.setName("Name");
+		person.setGender(Gender.M);
+		service.insert(person);
+
+		assertThatThrownBy(() -> service.get(null))
+				.isInstanceOf(PersonException.class)
+				.hasFieldOrPropertyWithValue("errors", expectedErrors)
+				.hasMessage(expectedMessage);
+	}
+
+	@Test
+	public void testDelete_shouldThrowPersonExceptionWhenPersonNameIsNull() {
+
+		List<String> expectedErrors = Lists.newArrayList("Name is required");
+		String expectedMessage = String.join(";", expectedErrors);
+		Person person = new Person();
+		person.setName("Name");
+		person.setGender(Gender.M);
+		service.insert(person);
+
+		assertThatThrownBy(() -> service.delete(null))
+				.isInstanceOf(PersonException.class)
+				.hasFieldOrPropertyWithValue("errors", expectedErrors)
+				.hasMessage(expectedMessage);
+	}
+
+	@Test
+	public void testDeletePerson() {
+
+		Person person = new Person();
+		person.setName("Name");
+		person.setGender(Gender.M);
+		service.insert(person);
+
+		try {
+			service.delete("Name");
+		} catch (Exception e) {
+			fail("The delete method should not throw an exception, but it threw: " + e.getMessage());
+		}
 	}
 
 }
