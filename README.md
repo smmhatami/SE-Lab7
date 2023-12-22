@@ -34,8 +34,9 @@
 در ادامه نحوه ی آزمون شدن هر یک از کلاس ها را به اختصار توضیح می دهیم. 
 
 - کلاس BehaviorException : این Exception که توسط هر دو تابع کلاس TrafficBehaviorServiceImpl پرتاب می شود، در سه تست نوشته شده در کلاس TrafficBehaviorServiceTest با فراخوانی این توابع پرتاب شده و تست می شود.
-- کلاس PersonException : این کلاس دو نوع پرتاب Exception دارد که یکی از آن ها یک خطا دارد و دیگری لیستی از خطاها. حالت تک خطای این تابع در تابع delete کلاس PersonServiceImpl استفاده شده است که در فرایند تست کردن حذف از تست های ما فراخوانی شده است و حالت چند خطای آن در PersonValidator استفاده شده است که در تابع insert از PersonServiceImpl استفاده شده است که به صورت متعدد در تست های پیاده سازی شده ی ما فراخوانی شده است. (TODO) 
-- کلاس PersonValidator : این کلاس صحت سنجی نمونه های validator را به عهده دارد و به همین منظور در کلاس PersonServiceImpl به دفعات استفاده شده است. هنگامی که توابع insert، delete از این کلاس فراخوانی می شوند، این توابع تست می شوند. (TODO)
+- کلاس PersonException : این کلاس دو نوع پرتاب Exception دارد که یکی از آن ها یک خطا دارد و دیگری لیستی از خطاها. حالت تک خطای این تابع در تابع delete کلاس PersonServiceImpl استفاده شده است که در فرایند تست کردن حذف از تست های ما فراخوانی شده است و حالت چند خطای آن در PersonValidator استفاده شده است که در تابع insert از PersonServiceImpl استفاده شده است که به صورت متعدد در تست های پیاده سازی شده ی ما فراخوانی شده است. 
+- کلاس PersonValidator : این کلاس صحت سنجی نمونه های validator را به عهده دارد و به همین منظور در کلاس PersonServiceImpl به دفعات استفاده شده است. هنگامی که توابع insert، delete از این کلاس فراخوانی می شوند، این توابع تست می شوند.
+
 - کلاس FootPassenger : این کلاس یک عابر پیاده را پیاده سازی می کند. تمام توابع این کلاس به غیر از setCrossedTheCrosswalk و crossedTheCrosswalk تست شده بودند. برای کامل شدن تست این کلاس در تابع testFootpassengerCrossTheStreet_shouldThrowBehaviorExceptionWhenFootpassengerCrossesTheRoadDuringHeavyTrafficAndWhileTheTrafficLightIsRed بید تابع setCrossedTheCrosswalk را نیز فراخوانی کنیم تا تعریف کردن عابر پیاده ی ما کامل شده باشد.
 
 ![Screenshot from 2023-12-22 18-11-32](https://github.com/smmhatami/SE-Lab7/assets/62210297/33c91fd4-5a22-4566-a9dc-5ef34ae7532d)
@@ -45,9 +46,13 @@
 
 ![Screenshot from 2023-12-22 18-14-44](https://github.com/smmhatami/SE-Lab7/assets/62210297/31b54d8a-17f6-4ead-81c1-9e050fb13550)
 
-- کلاس StreetDirectionFlow : (TODO)
-- کلاس Traffic : (TODO)
+- کلاس StreetDirectionFlow : این یک enum بوده که یک طرفه یا دو طرفه بودن یک خیابان را مشخص می کند. با set کردن این ویژگی برای یک خیابان در تست هایمان این کلاس نیز کاور می شود.
+- کلاس Traffic : این کلاس مدل ترافیکی ما را مشخص می کند که به کمک متد های setter آن میتوان وضعیت ترافیکی و سرعت مجاز را در آن تعیین کرد. در تست هایمان تمامی متد های این کلاس به جز متد های getter پوشش داده شده اند.
 - کلاس TrafficLight : این کلاس که تنها وضعیت چراغ راهنمایی رانندگی را نگهداری می کند، از ابتدا در تست های مختلف کلاس TrafficBehaviorServiceTest و هنگام تعریف یک موجودیت ترافیک جدید استفاده و تست شده بود.
 - کلاس PersonRepository : این کلاس در واقع تست شده و استفاده شده است ولی در پوشش های Intellij نمایش داده نمی شود. تمام توابع این کلاس در PersonServiceImpl فراخوانی و استفاده شده اند و با افزایش پوشش این فایل که توضیح داده میشود، پوشش آزمون برای این کلاس هم بالا رفته و کامل شده است.
-- کلاس PersonServiceImpl : (TODO)
+- کلاس PersonServiceImpl : از این کلاس متد های delete و get تست نشده بودند که با فراخوانی آنها، پس از ایجاد یک person آن متد ها به همراه تعدادی exception دیگر تست شدند.
+
+![image](https://github.com/smmhatami/SE-Lab7/assets/61017890/9427cf30-22b1-44b3-92a4-0386afde32de)
+![image](https://github.com/smmhatami/SE-Lab7/assets/61017890/30290965-d20d-4fd8-b1b5-6044b78f3ddc)
+
 - کلاس TrafficBehaviorServiceImpl :‌ این کلاس از ابتدا به صورت کامل تست شده بود. این کلاس دو تابع دارد که هر دو در تست های TrafficBehaviorServiceTest فراخوانی شده اند. 
